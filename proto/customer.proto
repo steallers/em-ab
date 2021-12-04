@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+option go_package = "github.com/steallers/em-ab/servers/services/grpc";
+package connectors;
+
+
+// =================================
+// Add New Customer Block
+// =================================
+message AddNewCustomerRequest {
+  uint64 UserID = 1;
+  string PersonalNumber = 2;
+  string FullName = 3;
+  uint64 CustomerTypeID = 4;
+}
+message AddNewCustomerResponses {
+  string Status = 1;  // success, failed
+  string Message = 2; // failed because what ? will describe here
+}
+
+// =================================
+// Remove Customer Block
+// =================================
+message RemoveCustomerResponse {
+  string Status = 1;  // success, failed
+  string Message = 2; // failed because what ? will describe here
+}
+message RemoveCustomerRequest {
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+}
+
+// =================================
+// Update Customer Data Block
+// =================================
+message UpdateCustomerDataRequest {
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+  string FirstName = 3;
+  string MiddleName = 4;
+  string LastName = 5;
+}
+message UpdateCustomerDataResponses{
+  string Status = 1;  // success, failed
+  string Message = 2; // failed because what ? will describe here
+}
+
+// =================================
+// Update Customer Profile Picture Data Block
+// =================================
+message UpdateCustomerProfilePictureRequest {
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+  string Base64Picture = 3;
+}
+message UpdateCustomerProfilePictureResponses{
+  string Status = 1;  // success, failed
+  string Message = 2; // failed because what ? will describe here
+}
+
+// =================================
+// Add Customer Contact
+// =================================
+message AddCustomerContactRequest{
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+  string ContactType = 3;
+  string ContactValue = 4;
+}
+message AddCustomerContactResponses{
+  string Status = 1;  // success, failed
+  string Message = 2; // failed because what ? will describe here
+}
+
+// =================================
+// Remove Customer Contact
+// =================================
+message RemoveCustomerContactRequest{
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+  string ContactID = 3;
+}
+message RemoveCustomerContactResponses{
+  string Status = 1;  // success, failed
+  string Message = 2;  // failed because what ? will describe here
+}
+
+// =================================
+// Update Customer Contact
+// =================================
+message UpdateCustomerContactRequest{
+  uint64 UserID = 1;
+  uint64 CustomerID = 2;
+  string ContactID = 3;
+  string ContactType = 4;
+  string ContactValue = 5;
+}
+message UpdateCustomerContactResponses{
+  string Status = 1;  // success, failed
+  string Message = 2;  // failed because what ? will describe here
+}
+
+service CustomerService {
+  rpc AddNewCustomer(AddNewCustomerRequest) returns (AddNewCustomerResponses){}
+  rpc RemoveCustomer(RemoveCustomerRequest) returns(RemoveCustomerResponse){}
+  rpc UpdateCustomerData(UpdateCustomerDataRequest) returns (UpdateCustomerDataResponses){}
+  rpc UpdateCustomerProfilePicture(UpdateCustomerProfilePictureRequest) returns(UpdateCustomerProfilePictureResponses){}
+  // Customer contacts
+  rpc AddCustomerContact(AddCustomerContactRequest) returns(AddCustomerContactResponses){}
+  rpc RemoveCustomerContact(RemoveCustomerContactRequest) returns(RemoveCustomerContactResponses){}
+  rpc UpdateCustomerContact(UpdateCustomerContactRequest) returns (UpdateCustomerContactResponses){}
+}
